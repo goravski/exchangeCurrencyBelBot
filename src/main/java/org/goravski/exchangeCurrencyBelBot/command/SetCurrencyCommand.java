@@ -1,14 +1,27 @@
 package org.goravski.exchangeCurrencyBelBot.command;
 
+import org.goravski.exchangeCurrencyBelBot.service.CurrencyModeService;
+import org.goravski.exchangeCurrencyBelBot.util.Utils;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-public class SetCurrencyCommand implements BotCommandInterface{
+import java.util.List;
+
+
+public class SetCurrencyCommand implements BotCommandInterface {
+    private final CurrencyModeService currencyModeService = CurrencyModeService.getInstance();
+
     @Override
     public SendMessage getSendMessageByCommand(Message message) {
-                return SendMessage.builder()
-                        .text("Выбери валюты для обмена")
-                        .chatId(message.getChatId().toString())
-                        .build();
+        List<List<InlineKeyboardButton>> buttons = Utils.buttonsConstruct(currencyModeService, message);
+        return SendMessage.builder()
+                .text("Выбери валюты для обмена \n" +
+                        "ПРОДАТЬ    |    КУПИТЬ")
+                .chatId(message.getChatId().toString())
+                .replyMarkup(InlineKeyboardMarkup.builder().keyboard(buttons).build())
+                .build();
     }
+
 }
