@@ -1,6 +1,5 @@
 package org.goravski.exchangeCurrencyBelBot.util;
 
-import com.vdurmont.emoji.EmojiParser;
 import org.goravski.exchangeCurrencyBelBot.entity.CurrencyName;
 import org.goravski.exchangeCurrencyBelBot.service.CurrencyModeService;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -32,6 +31,6 @@ public class Utils {
     }
 
     public static String getCurrencyButton(CurrencyName saved, CurrencyName current) {
-        return saved == current ? current + EmojiParser.parseToUnicode(":heart:") : current.name();
+        return saved == current ? current +" ✅" : current.name();
     }
 }
