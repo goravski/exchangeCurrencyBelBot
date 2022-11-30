@@ -1,17 +1,18 @@
 package org.goravski.exchangeCurrencyBelBot.entity;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+
 @Getter
+@AllArgsConstructor
 public enum CurrencyName {
-    USD,
-    EUR,
-    RUB,
-    BYN;
+    USD(1),
+    EUR(1),
+    RUB (100),
+    BYN(1);
 
-    private String code;
+    private int scale;
 
 }
