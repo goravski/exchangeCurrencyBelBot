@@ -1,15 +1,15 @@
 package org.goravski.exchangeCurrencyBelBot.service;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.goravski.exchangeCurrencyBelBot.entity.CurrencyName;
 import org.springframework.stereotype.Component;
-
 import java.net.HttpURLConnection;
-
 import static org.goravski.exchangeCurrencyBelBot.connection.BankConnections.*;
 import static org.goravski.exchangeCurrencyBelBot.util.RateJsonParser.*;
 
 @Component
+@Slf4j
 public class SberBankCurrencyConversionService implements CurrencyConversionService {
     private final static String URL_SBERBANK = "https://www.sber-bank.by/rates/rates.json";
 
@@ -23,12 +23,14 @@ public class SberBankCurrencyConversionService implements CurrencyConversionServ
     @SneakyThrows
     public double getBuyRate(CurrencyName currency) {
         HttpURLConnection connection = getConnection(URL_SBERBANK);
+        log.info("Connection for buy {} started", currency.name());
         return getBuyRateFromSberBamk(connection, currency);
     }
 
     @SneakyThrows
     public double getSaleRate(CurrencyName currency) {
         HttpURLConnection connection = getConnection(URL_SBERBANK);
+        log.info("Connection for sale {} started", currency.name());
         return getSaleRateFromSberBamk(connection, currency);
     }
 }

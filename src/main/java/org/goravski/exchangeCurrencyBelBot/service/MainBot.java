@@ -29,6 +29,8 @@ public class MainBot extends TelegramLongPollingBot {
 
     private final CurrencyModeService currencyModeService = CurrencyModeService.getInstance();
 
+    private final CurrencyConversionService conversionService = CurrencyConversionService.getInstance();
+
 
     @Override
     public String getBotUsername() {
@@ -62,7 +64,30 @@ public class MainBot extends TelegramLongPollingBot {
                         .getSendMessageByCommand(message);
             }
         }
+        if (message.hasText()) {
+            Optional<Double> value = parserDouble(message.getText());
+            CurrencyName originalCurrency = currencyModeService.getOriginalCurrency(message.getChatId());
+            CurrencyName targetCurrency = currencyModeService.getTargetCurrency(message.getChatId());
+            double conversionRatio = conversionService.getConversionRatio(originalCurrency, targetCurrency);
+            if (value.isPresent()) {
+                return SendMessage.builder()
+                        .chatId(message.getChatId())
+                        .text(String.format(
+                                "%4.2f %s is %4.2f %s"
+                                , value.get(), originalCurrency
+                                , value.get() * conversionRatio, targetCurrency))
+                        .build();
+            }
+        }
         return SendMessage.builder().chatId(message.getChatId()).text("Команда не распознана").build();
+    }
+
+    private Optional<Double> parserDouble(String text) {
+        try {
+            return Optional.of(Double.parseDouble(text));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 
     @SneakyThrows
