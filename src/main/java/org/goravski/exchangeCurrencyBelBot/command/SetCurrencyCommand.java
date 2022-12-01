@@ -17,8 +17,10 @@ public class SetCurrencyCommand implements BotCommandInterface {
     public SendMessage getSendMessageByCommand(Message message) {
         List<List<InlineKeyboardButton>> buttons = Utils.buttonsConstruct(currencyModeService, message);
         return SendMessage.builder()
-                .text("Выбери валюты для обмена \n" +
-                        "ПРОДАТЬ    |    КУПИТЬ")
+                .text("""
+                        Выбери валюты для обмена\s
+                         ПРОДАТЬ    |    КУПИТЬ\s
+                        затем введи сумму в поле ввода""")
                 .chatId(message.getChatId().toString())
                 .replyMarkup(InlineKeyboardMarkup.builder().keyboard(buttons).build())
                 .build();
