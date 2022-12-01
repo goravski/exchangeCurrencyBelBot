@@ -67,17 +67,19 @@ public class MainBot extends TelegramLongPollingBot {
         if (message.hasText()) {
             Optional<Double> value = parserDouble(message.getText());
             CurrencyName originalCurrency = currencyModeService.getOriginalCurrency(message.getChatId());
+            log.info("get original currency {} from", message.getFrom().getFirstName());
             CurrencyName targetCurrency = currencyModeService.getTargetCurrency(message.getChatId());
+            log.info("get target currency {} from", message.getFrom().getFirstName());
             double conversionRatio = conversionService.getConversionRatio(originalCurrency, targetCurrency);
             if (value.isPresent()) {
                 return SendMessage.builder()
                         .chatId(message.getChatId())
                         .text(String.format(
-                                "%4.2f %s is %4.2f %s"
+                                "%4.2f %s = %4.2f %s"
                                 , value.get(), originalCurrency
                                 , value.get() * conversionRatio, targetCurrency))
                         .build();
-            }
+            }else return SendMessage.builder().chatId(message.getChatId()).text("Введите сумму").build();
         }
         return SendMessage.builder().chatId(message.getChatId()).text("Команда не распознана").build();
     }
@@ -92,14 +94,16 @@ public class MainBot extends TelegramLongPollingBot {
 
     @SneakyThrows
     private EditMessageReplyMarkup handleCallBack(CallbackQuery callbackQuery) {
-        log.info("handleCallBac () currencyModeService = {}", currencyModeService);
+        log.info("handleCallBac () user = {}", callbackQuery.getFrom().getFirstName());
         Message message = callbackQuery.getMessage();
         String[] params = callbackQuery.getData().split(":");
         String action = params[0];
         CurrencyName newCurrencyName = CurrencyName.valueOf(params[1]);
         switch (action) {
-            case "Продажа" -> currencyModeService.setOriginalCurrency(message.getChatId(), newCurrencyName);
-            case "Покупка" -> currencyModeService.setTargetCurrency(message.getChatId(), newCurrencyName);
+            case "Продажа" -> {currencyModeService.setOriginalCurrency(message.getChatId(), newCurrencyName);
+                log.info("set original currency {} {}", message.getFrom().getFirstName(), newCurrencyName);}
+            case "Покупка" -> {currencyModeService.setTargetCurrency(message.getChatId(), newCurrencyName);
+                log.info("set target currency {} {}", message.getFrom().getFirstName(), newCurrencyName);}
         }
         List<List<InlineKeyboardButton>> buttons = Utils.buttonsConstruct(currencyModeService, message);
         return EditMessageReplyMarkup.builder()

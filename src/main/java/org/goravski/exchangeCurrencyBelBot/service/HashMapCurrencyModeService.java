@@ -23,19 +23,17 @@ public class HashMapCurrencyModeService implements CurrencyModeService {
 
     @Override
     public CurrencyName getTargetCurrency(long chatId) {
-        log.info("get current currency {}", chatId);
+        log.info("get target currency {}", chatId);
         return targetCurrency.getOrDefault(chatId, CurrencyName.USD);
     }
 
     @Override
     public void setOriginalCurrency(long chatId, CurrencyName currency) {
-        log.info("set original currency {} {}", chatId, currency);
         originalCurrency.put(chatId, currency);
     }
 
     @Override
     public void setTargetCurrency(long chatId, CurrencyName currency) {
-        log.info("set target currency {} {}", chatId, currency);
         targetCurrency.put(chatId, currency);
     }
 }
