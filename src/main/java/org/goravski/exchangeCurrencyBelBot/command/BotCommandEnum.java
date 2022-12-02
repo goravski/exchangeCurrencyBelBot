@@ -3,7 +3,8 @@ package org.goravski.exchangeCurrencyBelBot.command;
 import java.util.function.Supplier;
 
 public enum BotCommandEnum {
-    SET_CURRENCY(SetCurrencyCommand::new);
+    SET_CURRENCY(SetCurrencyCommand::new),
+    START(StartCommand::new);
 
     private final BotCommandInterface command;
 
