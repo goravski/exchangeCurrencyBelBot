@@ -1,24 +1,24 @@
-package org.goravski.exchangeCurrencyBelBot.util;
+package org.goravski.exchangeCurrencyBelBot.service;
 
-import jakarta.json.*;
-import lombok.SneakyThrows;
+import jakarta.json.JsonStructure;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.goravski.exchangeCurrencyBelBot.entity.CurrencyName;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import java.net.HttpURLConnection;
 
 @Slf4j
-public class RateJsonParser {
+@Component
+@RequiredArgsConstructor
+@Getter
+public class SberRateJsonParser implements RateJsonParser {
 
-    @SneakyThrows
-    public static JsonStructure getJsonStructure(HttpURLConnection connection) {
-        JsonReader reader = Json.createReader(connection.getInputStream());
-        return reader.read();
-    }
-
-    @SneakyThrows
-    public static Double getBuyRateFromSberBamk(HttpURLConnection connection, CurrencyName currency) {
+    @Override
+    public Double getBuyRate(HttpURLConnection connection, CurrencyName currency) {
         if (currency == CurrencyName.BYN) {
             return 1.0;
         }
@@ -43,8 +43,8 @@ public class RateJsonParser {
         return 0.0;
     }
 
-    @SneakyThrows
-    public static Double getSaleRateFromSberBamk(HttpURLConnection connection, CurrencyName currency) {
+    @Override
+    public Double getSaleRate(HttpURLConnection connection, CurrencyName currency) {
         if (currency == CurrencyName.BYN) {
             return 1.0;
         }
@@ -68,5 +68,4 @@ public class RateJsonParser {
         }
         return 0.0;
     }
-
 }
