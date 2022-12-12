@@ -6,6 +6,9 @@ import org.goravski.exchangeCurrencyBelBot.entity.CurrencyName;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Implementation CurrencyModeService
+ */
 @Slf4j
 public class HashMapCurrencyModeService implements CurrencyModeService {
     private final Map<Long, CurrencyName> originalCurrency = new HashMap<>();

@@ -9,6 +9,9 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 import java.util.List;
 
+/**
+ * Builds replay on command /start command.
+ */
 
 public class SetCurrencyCommand implements BotCommandInterface {
     private final CurrencyModeService currencyModeService = CurrencyModeService.getInstance();

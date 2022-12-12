@@ -5,6 +5,9 @@ import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 
 import java.util.Locale;
 
+/**
+ * Returns defined object from factory.
+ */
 public class BotCommandFactory {
     public static BotCommandInterface getCommandFromFactory(Message botMessage, MessageEntity messageEntity) {
         return BotCommandEnum.valueOf(

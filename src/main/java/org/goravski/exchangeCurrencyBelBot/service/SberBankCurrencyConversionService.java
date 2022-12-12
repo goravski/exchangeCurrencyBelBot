@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.net.HttpURLConnection;
 
+/**
+ * Implementation CurrencyConversionService interface for Sberbank Belarus
+ */
 
 @Component
 @Slf4j
@@ -21,13 +24,6 @@ public class SberBankCurrencyConversionService implements CurrencyConversionServ
     private final BankConnections conBank;
 
     private final SberRateJsonParser jsonParser;
-
-    @Override
-    public double getConversionRatio(CurrencyName original, CurrencyName target) {
-        double originalRate = getBuyRate(original);
-        double targetRate = getSaleRate(target);
-        return originalRate / targetRate;
-    }
 
     @SneakyThrows
     @Override

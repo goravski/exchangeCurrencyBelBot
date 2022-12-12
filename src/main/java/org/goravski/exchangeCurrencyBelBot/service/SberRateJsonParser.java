@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 
 import java.net.HttpURLConnection;
 
+/**
+ *Implementation RateJsonParser interface for parsing Sberbank Belarus rates.json data
+ */
 @Slf4j
 @Component
 @RequiredArgsConstructor

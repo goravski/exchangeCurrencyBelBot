@@ -1,8 +1,11 @@
 package org.goravski.exchangeCurrencyBelBot.service;
 
-
 import org.goravski.exchangeCurrencyBelBot.entity.CurrencyName;
 
+/**
+ * Getting and Setting currency name to collection.
+ * Collection save choices currency name
+ */
 public interface CurrencyModeService {
 
     static CurrencyModeService getInstance() {

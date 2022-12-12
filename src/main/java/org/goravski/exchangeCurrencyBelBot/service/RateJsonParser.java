@@ -8,6 +8,10 @@ import org.goravski.exchangeCurrencyBelBot.entity.CurrencyName;
 
 import java.net.HttpURLConnection;
 
+/**
+ * Interface connected to source and get data from site.
+ * Must return rate value of currency
+ */
 public interface RateJsonParser {
 
     @SneakyThrows
