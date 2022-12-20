@@ -1,36 +1,31 @@
 package org.goravski.exchangeCurrencyBelBot.util;
 
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.goravski.exchangeCurrencyBelBot.entity.CurrencyName;
-import org.goravski.exchangeCurrencyBelBot.service.CurrencyModeService;
+import org.goravski.exchangeCurrencyBelBot.service.HashMapCurrencyModeService;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+@Slf4j
 public class Utils {
-    public static List<List<InlineKeyboardButton>> buttonsConstruct(CurrencyModeService currencyModeService, Message message) {
-        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
-        CurrencyName originalCurrency = currencyModeService.getOriginalCurrency(message.getChatId());
-        CurrencyName targetCurrency = currencyModeService.getTargetCurrency(message.getChatId());
-        for (CurrencyName currency : CurrencyName.values()) {
-            buttons.add(Arrays.asList(
-                    InlineKeyboardButton.builder()
-                            .text(getCurrencyButton(originalCurrency, currency))
-                            .callbackData("Продажа:" + currency)
-                            .build(),
-                    InlineKeyboardButton.builder()
-                            .text(getCurrencyButton(targetCurrency, currency))
-                            .callbackData("Покупка:" + currency)
-                            .build()
-
-            ));
+    @SneakyThrows
+    public static void changeCurrencyInHashMap(CallbackQuery callbackQuery) {
+        Message message = callbackQuery.getMessage();
+        String[] params = callbackQuery.getData().split(":");
+        String action = params[1];
+        CurrencyName newCurrencyName = CurrencyName.valueOf(params[2]);
+        log.info("change currency to {}", newCurrencyName);
+        HashMapCurrencyModeService hashMapCurrency = HashMapCurrencyModeService.getInstance();
+        switch (action) {
+            case "Продажа" -> {
+                hashMapCurrency.setOriginalCurrency(message.getChatId(), newCurrencyName);
+                log.info("set original currency {} {}", message.getFrom().getFirstName(), newCurrencyName);
+            }
+            case "Покупка" -> {
+                hashMapCurrency.setTargetCurrency(message.getChatId(), newCurrencyName);
+                log.info("set target currency {} {}", message.getFrom().getFirstName(), newCurrencyName);
+            }
         }
-        return buttons;
-    }
-
-    public static String getCurrencyButton(CurrencyName saved, CurrencyName current) {
-        return saved == current ? current +" ✅" : current.name();
     }
 }

@@ -10,35 +10,28 @@ import org.springframework.stereotype.Component;
 
 import java.net.HttpURLConnection;
 
-/**
- * Implementation CurrencyConversionService interface for Sberbank Belarus
- */
-
 @Component
 @Slf4j
 @AllArgsConstructor
 @Getter
-public class SberBankCurrencyConversionService implements CurrencyConversionService {
-    private final static String URL_SBERBANK = "https://www.sber-bank.by/rates/rates.json";
-
+public class BelarusBankCurrencyConversionService implements CurrencyConversionService{
+    private final static String URL_BELARUSBANK = "https://belarusbank.by/api/kurs_cards";
     private final BankConnections conBank;
+    private final BelarusBankJsonParser jsonParser;
 
-    private final SberRateJsonParser jsonParser;
-
-    @SneakyThrows
     @Override
+    @SneakyThrows
     public double getBuyRate(CurrencyName currency) {
-        HttpURLConnection connection = conBank.getConnection(URL_SBERBANK);
+        HttpURLConnection connection = conBank.getConnection(URL_BELARUSBANK);
         log.info("Connection SBERBANK for buy {} started", currency.name());
         return jsonParser.getBuyRate(connection, currency);
     }
 
-    @SneakyThrows
     @Override
+    @SneakyThrows
     public double getSaleRate(CurrencyName currency) {
-        HttpURLConnection connection = conBank.getConnection(URL_SBERBANK);
+        HttpURLConnection connection = conBank.getConnection(URL_BELARUSBANK);
         log.info("Connection SBERBANK for sale {} started", currency.name());
         return jsonParser.getSaleRate(connection, currency);
     }
-
 }
