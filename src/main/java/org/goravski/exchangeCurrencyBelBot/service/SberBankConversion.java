@@ -12,8 +12,17 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class SberBankConversion implements CurrencyConversionService<SberBankConnection> {
-    @Autowired
+
     SberBankConnection conBank;
+    JsonStructure jsonStructure;
+    JSONArray resp;
+
+    @Autowired
+    public SberBankConversion (SberBankConnection conBank){
+        this.conBank = conBank;
+        jsonStructure = getJsonStructure(conBank.getConnection());
+        resp = new JSONArray(jsonStructure.toString());
+    }
 
 
     @Override
@@ -26,8 +35,7 @@ public class SberBankConversion implements CurrencyConversionService<SberBankCon
         if (currency == CurrencyName.BYN) {
             return 1.0;
         }
-        JsonStructure jsonStructure = getJsonStructure(conBank.getConnection());
-        JSONArray resp = new JSONArray(jsonStructure.toString());
+
         for (int i = 0; i < resp.length(); i++) {
             if (resp.getJSONObject(i).has("ratescard")) {
                 JSONArray list = resp.getJSONObject(i)
@@ -52,8 +60,7 @@ public class SberBankConversion implements CurrencyConversionService<SberBankCon
         if (currency == CurrencyName.BYN) {
             return 1.0;
         }
-        JsonStructure jsonStructure = getJsonStructure(conBank.getConnection());
-        JSONArray resp = new JSONArray(jsonStructure.toString());
+
         for (int i = 0; i < resp.length(); i++) {
             if (resp.getJSONObject(i).has("ratescard")) {
                 JSONArray list = resp.getJSONObject(i)
