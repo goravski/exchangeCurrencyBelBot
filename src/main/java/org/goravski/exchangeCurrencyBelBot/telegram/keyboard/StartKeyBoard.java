@@ -2,6 +2,7 @@ package org.goravski.exchangeCurrencyBelBot.telegram.keyboard;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -11,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
+@Slf4j
 public class StartKeyBoard implements KeyBoardInterface {
     @Getter
     @AllArgsConstructor
@@ -23,6 +25,7 @@ public class StartKeyBoard implements KeyBoardInterface {
 
     @Override
     public InlineKeyboardMarkup getKeyBoard(Update update) {
+        log.info("StartKeyBoard construct");
         return getInlineMessageButtons();
     }
 

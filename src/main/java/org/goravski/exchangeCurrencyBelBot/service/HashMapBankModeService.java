@@ -1,7 +1,7 @@
 package org.goravski.exchangeCurrencyBelBot.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.goravski.exchangeCurrencyBelBot.entity.Banks;
+import org.goravski.exchangeCurrencyBelBot.entity.BanksType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class HashMapBankModeService {
     private static  HashMapBankModeService INSTANCE;
 
-    private final Map<Long, Banks> choiceBank = new HashMap<>();
+    private final Map<Long, BanksType> choiceBank = new HashMap<>();
 
     private HashMapBankModeService (){
         System.out.println("HASHMAP for Bank is created");
@@ -27,13 +27,13 @@ public class HashMapBankModeService {
         }
         return INSTANCE;
     }
-     public Banks getBankName(Long chatId) {
-        log.debug("get name {} by {}", choiceBank.get(chatId), chatId);
+     public BanksType getBankName(Long chatId) {
+        log.info("get bank {} by {}", choiceBank.get(chatId), chatId);
         return choiceBank.get(chatId);
     }
 
-    public void setBankName(Long chatId, Banks banks) {
-        log.debug("set bank choice {} by {}", choiceBank.get(chatId), chatId);
+    public void setBankName(Long chatId, BanksType banks) {
+        log.info("set bank choice {} by {}", choiceBank.get(chatId), chatId);
         choiceBank.put(chatId, banks);
     }
 }

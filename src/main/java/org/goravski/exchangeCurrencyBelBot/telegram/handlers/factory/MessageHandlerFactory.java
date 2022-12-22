@@ -35,6 +35,7 @@ public class MessageHandlerFactory {
     }
 
     public static BotApiMethod<?> getUpdateMethodFromFactory(Update update) {
+        log.info("MessageHandlerFactory started");
         if (Validator.chekCallBackQuery(update)){
             String[] params = update.getCallbackQuery().getData().split(":");
             log.debug("CallBackQueryHandler params: {}", Arrays.toString(params));
@@ -43,15 +44,15 @@ public class MessageHandlerFactory {
         }
         Message message = update.getMessage();
         if (Validator.chekEntityType(message, EntityType.BOTCOMMAND)) {
-            log.debug("MessageHandler for bot command = {}", message.getText());
+            log.info("MessageHandler for bot command = {}", message.getText());
             return MessageEnum.valueOf(message.getText().substring(1).toUpperCase(Locale.ROOT))
                     .createMessageSend().getSendMessage(update);
         } else if ( NumberUtils.isDigits(message.getText())){
-            log.debug("MessageHandler for digit = {}", message.getText());
+            log.info("MessageHandler for digit = {}", message.getText());
             return MessageEnum.EXCHANGE_CURRENCY
                     .createMessageSend().getSendMessage(update);
         }else {
-            log.debug("MessageHandler for text = {}", message.getText());
+            log.info("MessageHandler for text = {}", message.getText());
             return MessageEnum.ERROR_MESSAGE
                     .createMessageSend().getSendMessage(update);
         }

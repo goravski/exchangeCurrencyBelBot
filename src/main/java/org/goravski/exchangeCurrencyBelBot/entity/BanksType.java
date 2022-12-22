@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum Banks {
+public enum BanksType {
     SBERBANK ("СБЕРБАНК"),
     BELARUSBANK("БЕЛАРУСБАНК");
 

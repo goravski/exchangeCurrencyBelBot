@@ -1,5 +1,6 @@
 package org.goravski.exchangeCurrencyBelBot.telegram.keyboard;
 
+import lombok.extern.slf4j.Slf4j;
 import org.goravski.exchangeCurrencyBelBot.entity.CurrencyName;
 import org.goravski.exchangeCurrencyBelBot.service.HashMapCurrencyModeService;
 import org.goravski.exchangeCurrencyBelBot.util.LocalConstant;
@@ -12,11 +13,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 public class SetCurrencyKeyBoard implements KeyBoardInterface {
     private final HashMapCurrencyModeService currencyModeService = HashMapCurrencyModeService.getInstance();
 
     @Override
     public ReplyKeyboard getKeyBoard(Update update) {
+        log.info("SetCurrencyKeyBoard construct");
         List<List<InlineKeyboardButton>> rowButtons = new ArrayList<>();
         Long chatId = update.getCallbackQuery().getMessage().getChatId();
         CurrencyName originalCurrency = currencyModeService.getOriginalCurrency(chatId);
@@ -35,6 +38,7 @@ public class SetCurrencyKeyBoard implements KeyBoardInterface {
         }
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         inlineKeyboardMarkup.setKeyboard(rowButtons);
+        log.info("Draw keyboard with active  Buy:{} Sale:{}", originalCurrency, targetCurrency);
         return inlineKeyboardMarkup;
     }
 

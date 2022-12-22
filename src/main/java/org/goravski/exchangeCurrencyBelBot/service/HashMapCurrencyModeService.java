@@ -31,13 +31,13 @@ public class HashMapCurrencyModeService {
 
 
     public CurrencyName getOriginalCurrency(long chatId) {
-        log.info("get original currency {}", chatId);
+        log.info("get original currency {}", originalCurrency.get(chatId));
         return originalCurrency.getOrDefault(chatId, CurrencyName.USD);
     }
 
 
     public CurrencyName getTargetCurrency(long chatId) {
-        log.info("get target currency {}", chatId);
+        log.info("get target currency {}", targetCurrency.get(chatId));
         return targetCurrency.getOrDefault(chatId, CurrencyName.USD);
     }
 

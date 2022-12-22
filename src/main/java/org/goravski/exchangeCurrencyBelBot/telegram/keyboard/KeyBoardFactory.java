@@ -1,6 +1,7 @@
 package org.goravski.exchangeCurrencyBelBot.telegram.keyboard;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.goravski.exchangeCurrencyBelBot.util.Validator;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.EntityType;
@@ -12,6 +13,7 @@ import java.util.function.Supplier;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class KeyBoardFactory {
     private enum KeyBoardEnum {
         START(StartKeyBoard::new),
@@ -30,6 +32,7 @@ public class KeyBoardFactory {
     }
 
     public static KeyBoardInterface getKeyBoardFromFactory(Update update){
+        log.info("KeyBoardFactory started");
         if (Validator.chekCallBackQuery(update)){
             String[] params = update.getCallbackQuery().getData().split(":");
             return KeyBoardEnum.valueOf((params[0]).toUpperCase(Locale.ROOT))

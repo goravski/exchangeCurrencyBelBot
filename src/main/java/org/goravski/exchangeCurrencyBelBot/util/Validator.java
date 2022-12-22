@@ -1,6 +1,6 @@
 package org.goravski.exchangeCurrencyBelBot.util;
 
-import org.goravski.exchangeCurrencyBelBot.entity.Banks;
+import org.goravski.exchangeCurrencyBelBot.entity.BanksType;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -23,6 +23,6 @@ public class Validator {
         return false;
     }
     public static boolean chekBanks (String bank){
-        return Stream.of(Banks.values()).anyMatch(banks -> bank.equals(banks.toString()));
+        return Stream.of(BanksType.values()).anyMatch(banks -> bank.equals(banks.toString()));
     }
 }

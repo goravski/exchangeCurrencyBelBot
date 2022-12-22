@@ -1,11 +1,27 @@
 package org.goravski.exchangeCurrencyBelBot.service;
 
+import jakarta.json.Json;
+import jakarta.json.JsonReader;
+import jakarta.json.JsonStructure;
+import lombok.SneakyThrows;
+import org.goravski.exchangeCurrencyBelBot.entity.BanksType;
 import org.goravski.exchangeCurrencyBelBot.entity.CurrencyName;
+
+import java.net.HttpURLConnection;
 
 /**
  * Interface must get BankConnections and class implemented RateJsonParser and realize conversion currency
  */
-public interface CurrencyConversionService {
+public interface CurrencyConversionService <T>{
+
+    BanksType getBankType();
+
+    @SneakyThrows
+    default JsonStructure getJsonStructure(HttpURLConnection connection) {
+        JsonReader reader = Json.createReader(connection.getInputStream());
+        return reader.read();
+    }
+
     /**
      * @param original - original currency  Enum object
      * @param target   - target currency  Enum object

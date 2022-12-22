@@ -1,6 +1,7 @@
 package org.goravski.exchangeCurrencyBelBot.telegram.handlers;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.goravski.exchangeCurrencyBelBot.telegram.keyboard.KeyBoardFactory;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -9,11 +10,13 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 /**
  * Builds replay on command /start command.
  */
+@Slf4j
 public class StartHandler extends AbstractMessageHandler {
 
     @Override
     public SendMessage getSendMessage(Update update) {
         ReplyKeyboard keyBoard = KeyBoardFactory.getKeyBoardFromFactory(update).getKeyBoard(update);
+        log.info("StartHandler send message + keyboard");
         return SendMessage.builder()
                 .chatId(update.getMessage().getChatId())
                 .text("Привет, " + update.getMessage().getFrom().getFirstName() + "!\n"
