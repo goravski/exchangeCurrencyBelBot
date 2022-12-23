@@ -28,14 +28,19 @@ public class SetCurrencyKeyBoard implements KeyBoardInterface {
             rowButtons.add(Arrays.asList(
                     InlineKeyboardButton.builder()
                             .text(getCurrencyButton(originalCurrency, currency))
-                            .callbackData(LocalConstant.SET_CURRENCY + ":"+  "Продажа" + ":" + currency)
+                            .callbackData(LocalConstant.SET_CURRENCY + ":" + "Продажа" + ":" + currency)
                             .build(),
                     InlineKeyboardButton.builder()
                             .text(getCurrencyButton(targetCurrency, currency))
-                            .callbackData(LocalConstant.SET_CURRENCY + ":"+  "Покупка" + ":" + currency)
+                            .callbackData(LocalConstant.SET_CURRENCY + ":" + "Покупка" + ":" + currency)
                             .build()
             ));
         }
+        rowButtons.add(List.of(
+                InlineKeyboardButton.builder()
+                        .text("НАЗАД")
+                        .callbackData(LocalConstant.START + ":" + "Back" + ":" + "Back")
+                        .build()));
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         inlineKeyboardMarkup.setKeyboard(rowButtons);
         log.info("Draw keyboard with active  Buy:{} Sale:{}", originalCurrency, targetCurrency);

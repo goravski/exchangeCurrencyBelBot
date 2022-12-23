@@ -7,7 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum BanksType {
     SBERBANK ("СБЕРБАНК"),
-    BELARUSBANK("БЕЛАРУСБАНК");
+    BELARUSBANK("БЕЛАРУСБАНК"),
+    BACK("НАЗАД");
 
     private String nameBank;
 

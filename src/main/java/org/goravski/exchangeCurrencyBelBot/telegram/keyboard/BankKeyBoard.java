@@ -1,8 +1,7 @@
 package org.goravski.exchangeCurrencyBelBot.telegram.keyboard;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.goravski.exchangeCurrencyBelBot.entity.BanksType;
 import org.goravski.exchangeCurrencyBelBot.util.LocalConstant;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -15,17 +14,6 @@ import java.util.stream.Stream;
 
 @Slf4j
 public class BankKeyBoard implements KeyBoardInterface {
-    @AllArgsConstructor
-    @Getter
-    enum Bank {
-        SBERBANK("СБЕРБАНК"),
-        BELARUSBANK("БЕЛАРУСБАНК"),
-        BACK("НАЗАД");
-
-        private String nameBank;
-    }
-
-
 
     @Override
     public InlineKeyboardMarkup getKeyBoard(Update update) {
@@ -35,17 +23,23 @@ public class BankKeyBoard implements KeyBoardInterface {
 
     public InlineKeyboardMarkup getInlineMessageButtons() {
         List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
-        Stream.of(Bank.values()).forEach(bank -> rowList.add(getButton(bank)));
+        Stream.of(BanksType.values()).forEach(bank -> rowList.add(getButton(bank)));
 
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         inlineKeyboardMarkup.setKeyboard(rowList);
         return inlineKeyboardMarkup;
     }
 
-    private List<InlineKeyboardButton> getButton(Bank bank) {
+    private List<InlineKeyboardButton> getButton(BanksType bank) {
         return new ArrayList<>(Collections.singleton(InlineKeyboardButton.builder()
                 .text(bank.getNameBank())
-                .callbackData( LocalConstant.SET_CURRENCY + ":" + bank + ":")
+                .callbackData(chekButton(bank) + ":" + bank + ":")
                 .build()));
+    }
+
+    private String chekButton(BanksType bank) {
+        if (bank.equals(BanksType.BACK)) {
+            return LocalConstant.START;
+        } else return LocalConstant.SET_CURRENCY;
     }
 }
