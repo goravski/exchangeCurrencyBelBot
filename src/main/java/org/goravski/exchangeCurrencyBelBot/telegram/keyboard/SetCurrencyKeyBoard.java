@@ -39,7 +39,7 @@ public class SetCurrencyKeyBoard implements KeyBoardInterface {
         rowButtons.add(List.of(
                 InlineKeyboardButton.builder()
                         .text("НАЗАД")
-                        .callbackData(LocalConstant.START + ":" + "Back" + ":" + "Back")
+                        .callbackData(LocalConstant.BANKS + ":" + "Back" + ":" + "Back")
                         .build()));
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         inlineKeyboardMarkup.setKeyboard(rowButtons);
