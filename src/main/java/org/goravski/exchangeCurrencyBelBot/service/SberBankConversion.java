@@ -11,17 +11,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class SberBankConversion implements CurrencyConversionService<SberBankConnection> {
+public class SberBankConversion implements CurrencyConversionService {
 
-    SberBankConnection conBank;
-    JsonStructure jsonStructure;
-    JSONArray resp;
+    private final JSONArray jsonArray;
 
     @Autowired
     public SberBankConversion (SberBankConnection conBank){
-        this.conBank = conBank;
-        jsonStructure = getJsonStructure(conBank.getConnection());
-        resp = new JSONArray(jsonStructure.toString());
+        JsonStructure jsonStructure = getJsonStructure(conBank.getConnection());
+        jsonArray = new JSONArray(jsonStructure.toString());
     }
 
 
@@ -36,9 +33,9 @@ public class SberBankConversion implements CurrencyConversionService<SberBankCon
             return 1.0;
         }
 
-        for (int i = 0; i < resp.length(); i++) {
-            if (resp.getJSONObject(i).has("ratescard")) {
-                JSONArray list = resp.getJSONObject(i)
+        for (int i = 0; i < jsonArray.length(); i++) {
+            if (jsonArray.getJSONObject(i).has("ratescard")) {
+                JSONArray list = jsonArray.getJSONObject(i)
                         .getJSONObject("ratescard")
                         .getJSONObject("data")
                         .getJSONObject("rates")
@@ -46,7 +43,7 @@ public class SberBankConversion implements CurrencyConversionService<SberBankCon
                 for (int j = 0; j < list.length(); j++) {
                     JSONObject rate = list.getJSONObject(j);
                     if (currency.name().equals(rate.get("iso"))) {
-                        log.info("Get Buy rate {}", currency.name());
+                        log.info("Get Buy rate {} from json", currency.name());
                         return rate.getDouble("buy") / currency.getScale();
                     }
                 }
@@ -61,9 +58,9 @@ public class SberBankConversion implements CurrencyConversionService<SberBankCon
             return 1.0;
         }
 
-        for (int i = 0; i < resp.length(); i++) {
-            if (resp.getJSONObject(i).has("ratescard")) {
-                JSONArray list = resp.getJSONObject(i)
+        for (int i = 0; i < jsonArray.length(); i++) {
+            if (jsonArray.getJSONObject(i).has("ratescard")) {
+                JSONArray list = jsonArray.getJSONObject(i)
                         .getJSONObject("ratescard")
                         .getJSONObject("data")
                         .getJSONObject("rates")
@@ -71,7 +68,7 @@ public class SberBankConversion implements CurrencyConversionService<SberBankCon
                 for (int j = 0; j < list.length(); j++) {
                     JSONObject rate = list.getJSONObject(j);
                     if (currency.name().equals(rate.get("iso"))) {
-                        log.info("Get Sale rate {}", currency.name());
+                        log.info("Get Sale rate {} from json", currency.name());
                         return rate.getDouble("sale") / currency.getScale();
                     }
                 }
