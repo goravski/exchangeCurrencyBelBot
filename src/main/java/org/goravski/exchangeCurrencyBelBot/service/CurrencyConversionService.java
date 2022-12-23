@@ -12,7 +12,7 @@ import java.net.HttpURLConnection;
 /**
  * Interface must get BankConnections and class implemented RateJsonParser and realize conversion currency
  */
-public interface CurrencyConversionService <T>{
+public interface CurrencyConversionService {
 
     BanksType getBankType();
 
