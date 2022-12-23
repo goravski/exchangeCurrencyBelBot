@@ -15,7 +15,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 
 @Slf4j
 public class SetCurrencyMessageHandler extends AbstractMessageHandler {
-
+    HashMapBankModeService mapBank = HashMapBankModeService.getInstance();
 
     @Override
     public BotApiMethod<?> getSendMessage(Update update) {
@@ -28,11 +28,15 @@ public class SetCurrencyMessageHandler extends AbstractMessageHandler {
                 HashMapBankModeService.getInstance().setBankName(chatId, BanksType.valueOf(param_2));
                 log.info("SetCurrencyMessageHandler send message make choice currency keyboard");
                 return SendMessage.builder()
-                        .text("""
+                        .text(String.format( """
+                                Выбран %s
+                                \s
                                 Выбери валюты для обмена\s
+                                и\s
                                 введи сумму в поле ввода\s
+                                \s
                                  ПРОДАТЬ    |    КУПИТЬ
-                                """)
+                                """, mapBank.getBankName(chatId)))
                         .chatId(chatId)
                         .replyMarkup(KeyBoardFactory.getKeyBoardFromFactory(update).getKeyBoard(update))
                         .build();
