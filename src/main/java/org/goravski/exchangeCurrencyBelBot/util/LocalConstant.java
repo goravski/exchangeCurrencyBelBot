@@ -4,4 +4,5 @@ public class LocalConstant {
     public final static String SET_CURRENCY = "SET_CURRENCY";
     public static final String START = "START";
     public static final String BANKS = "BANKS";
+    public static final String FORTY = "                                       ";
 }

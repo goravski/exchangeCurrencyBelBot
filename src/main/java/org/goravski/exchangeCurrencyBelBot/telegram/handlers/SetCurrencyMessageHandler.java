@@ -28,6 +28,7 @@ public class SetCurrencyMessageHandler extends AbstractMessageHandler {
                 HashMapBankModeService.getInstance().setBankName(chatId, BanksType.valueOf(param_2));
                 log.info("SetCurrencyMessageHandler send message make choice currency keyboard");
                 return SendMessage.builder()
+                        .parseMode("HTML")
                         .text(String.format( """
                                 Выбран %s
                                 \s
@@ -35,7 +36,7 @@ public class SetCurrencyMessageHandler extends AbstractMessageHandler {
                                 и\s
                                 введи сумму в поле ввода\s
                                 \s
-                                 ПРОДАТЬ    |    КУПИТЬ
+                                 <b>ПРОДАТЬ    |    КУПИТЬ</b>
                                 """, mapBank.getBankName(chatId)))
                         .chatId(chatId)
                         .replyMarkup(KeyBoardFactory.getKeyBoardFromFactory(update).getKeyBoard(update))
