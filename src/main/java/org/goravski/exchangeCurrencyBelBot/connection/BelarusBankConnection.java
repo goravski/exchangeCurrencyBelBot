@@ -1,7 +1,6 @@
-package org.goravski.exchangeCurrencyBelBot.service;
+package org.goravski.exchangeCurrencyBelBot.connection;
 
 import lombok.Getter;
-import org.goravski.exchangeCurrencyBelBot.connection.BankConnections;
 import org.springframework.stereotype.Component;
 
 import java.net.HttpURLConnection;

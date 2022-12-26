@@ -2,6 +2,7 @@ package org.goravski.exchangeCurrencyBelBot.service;
 
 import jakarta.json.JsonStructure;
 import lombok.extern.slf4j.Slf4j;
+import org.goravski.exchangeCurrencyBelBot.connection.SberBankConnection;
 import org.goravski.exchangeCurrencyBelBot.entity.BanksType;
 import org.goravski.exchangeCurrencyBelBot.entity.CurrencyName;
 import org.json.JSONArray;
