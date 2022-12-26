@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.goravski.exchangeCurrencyBelBot.entity.BanksType;
 import org.goravski.exchangeCurrencyBelBot.service.HashMapBankModeService;
 import org.goravski.exchangeCurrencyBelBot.telegram.keyboard.KeyBoardFactory;
+import org.goravski.exchangeCurrencyBelBot.util.Emoji;
 import org.goravski.exchangeCurrencyBelBot.util.Utils;
 import org.goravski.exchangeCurrencyBelBot.util.Validator;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -29,15 +30,16 @@ public class SetCurrencyMessageHandler extends AbstractMessageHandler {
                 log.info("SetCurrencyMessageHandler send message make choice currency keyboard");
                 return SendMessage.builder()
                         .parseMode("HTML")
-                        .text(String.format( """
-                                Выбран %s
+                        .text(String.format("""
+                                  %s  +%s
                                 \s
-                                Выбери валюты для обмена\s
-                                и\s
-                                введи сумму в поле ввода\s
+                                1. Выбери валюты для обмена\s
+                                2. введи сумму в поле ввода\s
+                                \s
+                                "<i>Сумму можешь вводить многократно.</i>"
                                 \s
                                  <b>ПРОДАТЬ    |    КУПИТЬ</b>
-                                """, mapBank.getBankName(chatId)))
+                                """, mapBank.getBankName(chatId), Emoji.CHEK))
                         .chatId(chatId)
                         .replyMarkup(KeyBoardFactory.getKeyBoardFromFactory(update).getKeyBoard(update))
                         .build();

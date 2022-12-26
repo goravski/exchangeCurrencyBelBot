@@ -3,6 +3,7 @@ package org.goravski.exchangeCurrencyBelBot.telegram.keyboard;
 import lombok.extern.slf4j.Slf4j;
 import org.goravski.exchangeCurrencyBelBot.entity.CurrencyName;
 import org.goravski.exchangeCurrencyBelBot.service.HashMapCurrencyModeService;
+import org.goravski.exchangeCurrencyBelBot.util.Emoji;
 import org.goravski.exchangeCurrencyBelBot.util.LocalConstant;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -48,7 +49,7 @@ public class SetCurrencyKeyBoard implements KeyBoardInterface {
     }
 
     public static String getCurrencyButton(CurrencyName saved, CurrencyName current) {
-        return saved == current ? current + " ✅" : current.name();
+        return saved == current ? current + "  " + Emoji.CHEK.toString() : current.name();
     }
 
 }

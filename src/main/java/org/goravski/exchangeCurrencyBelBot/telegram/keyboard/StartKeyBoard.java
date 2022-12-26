@@ -3,6 +3,7 @@ package org.goravski.exchangeCurrencyBelBot.telegram.keyboard;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.goravski.exchangeCurrencyBelBot.util.Emoji;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -17,8 +18,8 @@ public class StartKeyBoard implements KeyBoardInterface {
     @Getter
     @AllArgsConstructor
     enum Menu {
-        BANKS("БАНКИ"),
-        ANALYTICS("АНАЛИТИКА");
+        BANKS("БАНКИ  " + Emoji.BANK),
+        ANALYTICS("АНАЛИТИКА  " + Emoji.CHART);
 
         private String nameStart;
     }

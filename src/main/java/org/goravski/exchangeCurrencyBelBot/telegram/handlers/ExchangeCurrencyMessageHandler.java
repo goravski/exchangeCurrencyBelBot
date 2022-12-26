@@ -8,6 +8,7 @@ import org.goravski.exchangeCurrencyBelBot.entity.CurrencyName;
 import org.goravski.exchangeCurrencyBelBot.service.ConversionFactory;
 import org.goravski.exchangeCurrencyBelBot.service.HashMapBankModeService;
 import org.goravski.exchangeCurrencyBelBot.service.HashMapCurrencyModeService;
+import org.goravski.exchangeCurrencyBelBot.util.Emoji;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -36,7 +37,7 @@ public class ExchangeCurrencyMessageHandler extends AbstractMessageHandler {
             return SendMessage.builder()
                     .chatId(message.getChatId())
                     .text(String.format(
-                            "%4.2f %s = %4.2f %s"
+                            "%4.2f %s = %4.2f %s  " + Emoji.COUNT
                             , value, originalCurrency
                             , value * conversionRatio, targetCurrency))
                     .build();
