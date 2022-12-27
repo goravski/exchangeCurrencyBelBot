@@ -38,7 +38,7 @@ public class ExchangeCurrencyMessageHandler extends AbstractMessageHandler {
             return SendPhoto.builder()
                     .chatId(message.getChatId())
                     .photo(new InputFile(
-                            new File("D:\\IDEA_Projects\\exchangeCurrencyBelBot\\assests\\ready.png")))
+                            new File("D:\\IDEA_Projects\\exchangeCurrencyBelBot\\assests\\done.jpg")))
                     .caption(String.format(
                             "%4.2f %s = %4.2f %s  "
                             , value, originalCurrency

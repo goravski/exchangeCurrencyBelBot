@@ -43,7 +43,7 @@ public class BelarusBankConversion implements CurrencyConversionService {
         if (currency == CurrencyName.BYN) {
             return 1.0;
         }
-        return jsonObject.getDouble(keyBuyExtractor(currency));
+        return jsonObject.getDouble(keyBuyExtractor(currency))/currency.getScale();
     }
 
 
@@ -52,7 +52,7 @@ public class BelarusBankConversion implements CurrencyConversionService {
         if (currency == CurrencyName.BYN) {
             return 1.0;
         }
-        return jsonObject.getDouble(keySaleExtractor(currency));
+        return jsonObject.getDouble(keySaleExtractor(currency))/currency.getScale();
     }
 
     private String keyBuyExtractor(CurrencyName currency) {
