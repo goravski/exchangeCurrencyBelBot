@@ -1,18 +1,32 @@
 package org.goravski.exchangeCurrencyBelBot.telegram.handlers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.goravski.exchangeCurrencyBelBot.util.Validator;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
+
+import java.io.File;
 
 @Slf4j
 public class ErrorEnterMessageHandler extends AbstractMessageHandler {
     @Override
-    public BotApiMethod<?> getSendMessage(Update update) {
+    public SendPhoto getSendMessage(Update update) {
         log.info("ErrorEnterMessageHandler send Message");
-        return SendMessage.builder()
-                .chatId(update.getMessage().getChatId())
-                .text("Введите корректную сумму")
-                .build();
+        if (Validator.chekCallBackQuery(update)){
+            return SendPhoto.builder()
+                    .photo(new InputFile(
+                            new File("D:\\IDEA_Projects\\exchangeCurrencyBelBot\\assests\\error.jpg")))
+                    .chatId(update.getCallbackQuery().getMessage().getChatId())
+                    .caption("Введите корректную сумму")
+                    .build();
+        }else {
+            return SendPhoto.builder()
+                    .photo(new InputFile(
+                            new File("D:\\IDEA_Projects\\exchangeCurrencyBelBot\\assests\\error.jpg")))
+                    .chatId(update.getMessage().getChatId())
+                    .caption("Введите корректную сумму")
+                    .build();
+        }
     }
 }

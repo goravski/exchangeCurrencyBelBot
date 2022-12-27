@@ -2,23 +2,28 @@ package org.goravski.exchangeCurrencyBelBot.telegram.handlers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.goravski.exchangeCurrencyBelBot.telegram.keyboard.KeyBoardFactory;
-import org.goravski.exchangeCurrencyBelBot.util.LocalConstant;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
+
+import java.io.File;
 
 @Slf4j
 public class BankMessageHandler extends AbstractMessageHandler {
 
     @Override
-    public SendMessage getSendMessage(Update update) {
+    public SendPhoto getSendMessage(Update update) {
         ReplyKeyboard keyBoard = KeyBoardFactory.getKeyBoardFromFactory(update).getKeyBoard(update);
         log.info("BankMessageHandler sendMessage");
-        return SendMessage.builder()
+        SendPhoto sendPhoto = SendPhoto.builder()
                 .chatId(update.getCallbackQuery().getMessage().getChatId())
+                .photo(new InputFile(
+                        new File("D:\\IDEA_Projects\\exchangeCurrencyBelBot\\assests\\nbrb.jpg")))
                 .parseMode("HTML")
-                .text("<strong>Выбери банк</strong>")
+                .caption("<strong>Выбери банк</strong>")
                 .replyMarkup(keyBoard)
                 .build();
+        return sendPhoto;
     }
 }

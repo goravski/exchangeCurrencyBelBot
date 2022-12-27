@@ -25,6 +25,15 @@ public class SetCurrencyKeyBoard implements KeyBoardInterface {
         Long chatId = update.getCallbackQuery().getMessage().getChatId();
         CurrencyName originalCurrency = currencyModeService.getOriginalCurrency(chatId);
         CurrencyName targetCurrency = currencyModeService.getTargetCurrency(chatId);
+        rowButtons.add(Arrays.asList(
+                InlineKeyboardButton.builder()
+                        .text("ПРОДАТЬ")
+                        .callbackData(LocalConstant.SET_CURRENCY + ":" + "Продажа" + ":" + "")
+                        .build(),
+                InlineKeyboardButton.builder()
+                        .text("КУПИТЬ")
+                        .callbackData(LocalConstant.SET_CURRENCY + ":" + "Продажа" + ":" + "")
+                        .build()));
         for (CurrencyName currency : CurrencyName.values()) {
             rowButtons.add(Arrays.asList(
                     InlineKeyboardButton.builder()
@@ -49,7 +58,7 @@ public class SetCurrencyKeyBoard implements KeyBoardInterface {
     }
 
     public static String getCurrencyButton(CurrencyName saved, CurrencyName current) {
-        return saved == current ? current + "  " + Emoji.CHEK.toString() : current.name();
+        return saved == current ? current + "  " + Emoji.CHEK : current.name();
     }
 
 }

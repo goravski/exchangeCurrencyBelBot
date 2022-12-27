@@ -5,58 +5,60 @@ import lombok.extern.slf4j.Slf4j;
 import org.goravski.exchangeCurrencyBelBot.entity.BanksType;
 import org.goravski.exchangeCurrencyBelBot.service.HashMapBankModeService;
 import org.goravski.exchangeCurrencyBelBot.telegram.keyboard.KeyBoardFactory;
-import org.goravski.exchangeCurrencyBelBot.util.Emoji;
 import org.goravski.exchangeCurrencyBelBot.util.Utils;
 import org.goravski.exchangeCurrencyBelBot.util.Validator;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+
+import java.io.File;
 
 @Slf4j
 public class SetCurrencyMessageHandler extends AbstractMessageHandler {
     HashMapBankModeService mapBank = HashMapBankModeService.getInstance();
 
     @Override
-    public BotApiMethod<?> getSendMessage(Update update) {
+    public SendPhoto getSendMessage(Update update) {
 
         if (update.hasCallbackQuery()) {
             Long chatId = update.getCallbackQuery().getMessage().getChatId();
             Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
             String param_2 = update.getCallbackQuery().getData().split(":")[1];
             if (Validator.chekBanks(param_2)) {
-                HashMapBankModeService.getInstance().setBankName(chatId, BanksType.valueOf(param_2));
+                HashMapBankModeService.getInstance().setBankEntity(chatId, BanksType.valueOf(param_2));
                 log.info("SetCurrencyMessageHandler send message make choice currency keyboard");
-                return SendMessage.builder()
+                return SendPhoto.builder()
                         .parseMode("HTML")
-                        .text(String.format("""
-                                  %s  +%s
+                        .photo(new InputFile(
+                                new File(mapBank.getBankEntity(chatId).getNameBankInterface().getPath())))
+                        .caption("""
                                 \s
                                 1. Выбери валюты для обмена\s
                                 2. введи сумму в поле ввода\s
                                 \s
-                                "<i>Сумму можешь вводить многократно.</i>"
-                                \s
-                                 <b>ПРОДАТЬ    |    КУПИТЬ</b>
-                                """, mapBank.getBankName(chatId), Emoji.CHEK))
+
+                                """)
                         .chatId(chatId)
                         .replyMarkup(KeyBoardFactory.getKeyBoardFromFactory(update).getKeyBoard(update))
                         .build();
+
             } else {
                 Utils.changeCurrencyInHashMap(update.getCallbackQuery());
                 log.info("SetCurrencyMessageHandler send keyboard");
-                return EditMessageReplyMarkup.builder()
+                return SendPhoto.builder()
                         .chatId(chatId)
-                        .messageId(messageId)
-                        .replyMarkup((InlineKeyboardMarkup) KeyBoardFactory.getKeyBoardFromFactory(update).getKeyBoard(update))
+                        .photo(new InputFile(
+                                new File(mapBank.getBankEntity(chatId).getNameBankInterface().getPath())))
+                        .replyMarkup(KeyBoardFactory.getKeyBoardFromFactory(update).getKeyBoard(update))
                         .build();
             }
         } else {
             log.info("SetCurrencyMessageHandler send error message");
-            return SendMessage.builder()
+            return SendPhoto.builder()
                     .chatId(update.getCallbackQuery().getMessage().getChatId())
-                    .text("something wrong")
+                    .photo(new InputFile(
+                            new File("D:\\IDEA_Projects\\exchangeCurrencyBelBot\\assests\\error.jpg")))
+                    .caption("something wrong")
                     .build();
         }
     }

@@ -1,16 +1,20 @@
 package org.goravski.exchangeCurrencyBelBot.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import org.goravski.exchangeCurrencyBelBot.util.Emoji;
+import java.util.function.Supplier;
 
-@Getter
-@AllArgsConstructor
+
 public enum BanksType {
-    SBERBANK ("СБЕРБАНК"),
-    BELARUSBANK("БЕЛАРУСБАНК"),
-    BACK("НАЗАД  " + Emoji.TURN);
+    SBERBANK (Sberbank::new),
+    BELARUSBANK(BelarusBank::new),
+    BACK(Back::new);
 
-    private String nameBank;
+    BanksType(Supplier<EntityInterface> consumer) {
+        this.nameBank = consumer.get();
+    }
 
+    private final EntityInterface nameBank;
+
+    public EntityInterface getNameBankInterface() {
+        return nameBank;
+    }
 }

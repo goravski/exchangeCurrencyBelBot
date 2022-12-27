@@ -27,12 +27,12 @@ public class HashMapBankModeService {
         }
         return INSTANCE;
     }
-     public BanksType getBankName(Long chatId) {
+     public BanksType getBankEntity(Long chatId) {
         log.info("get bank {} by {}", choiceBank.get(chatId), chatId);
         return choiceBank.get(chatId);
     }
 
-    public void setBankName(Long chatId, BanksType banks) {
+    public void setBankEntity(Long chatId, BanksType banks) {
         log.info("set bank choice {} by {}", choiceBank.get(chatId), chatId);
         choiceBank.put(chatId, banks);
     }

@@ -8,12 +8,13 @@ import org.goravski.exchangeCurrencyBelBot.entity.CurrencyName;
 import org.goravski.exchangeCurrencyBelBot.service.ConversionFactory;
 import org.goravski.exchangeCurrencyBelBot.service.HashMapBankModeService;
 import org.goravski.exchangeCurrencyBelBot.service.HashMapCurrencyModeService;
-import org.goravski.exchangeCurrencyBelBot.util.Emoji;
 import org.springframework.stereotype.Service;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+
+import java.io.File;
 
 @Slf4j
 @Service
@@ -24,28 +25,32 @@ public class ExchangeCurrencyMessageHandler extends AbstractMessageHandler {
 
 
     @Override
-    public BotApiMethod<?> getSendMessage(Update update) {
+    public SendPhoto getSendMessage(Update update) {
         Message message = update.getMessage();
         if (NumberUtils.isDigits(message.getText())) {
             Double value = NumberUtils.createDouble(message.getText());
             CurrencyName originalCurrency = currencyModeService.getOriginalCurrency(message.getChatId());
             CurrencyName targetCurrency = currencyModeService.getTargetCurrency(message.getChatId());
             double conversionRatio = ConversionFactory.getConversionService(
-                    mapBankModeService.getBankName(message.getChatId())
+                    mapBankModeService.getBankEntity(message.getChatId())
             ).getConversionRatio(originalCurrency, targetCurrency);
             log.info("ExchangeCurrencyMessageHandler Count rate index = {}, send message result", conversionRatio);
-            return SendMessage.builder()
+            return SendPhoto.builder()
                     .chatId(message.getChatId())
-                    .text(String.format(
-                            "%4.2f %s = %4.2f %s  " + Emoji.COUNT
+                    .photo(new InputFile(
+                            new File("D:\\IDEA_Projects\\exchangeCurrencyBelBot\\assests\\ready.png")))
+                    .caption(String.format(
+                            "%4.2f %s = %4.2f %s  "
                             , value, originalCurrency
                             , value * conversionRatio, targetCurrency))
                     .build();
         } else {
             log.info("ExchangeCurrencyMessageHandler Message text is not digit; {}", message.getText());
-            return SendMessage.builder()
+            return SendPhoto.builder()
                     .chatId(message.getChatId())
-                    .text("Введённый текст не является числом\n" +
+                    .photo(new InputFile(
+                            new File("D:\\IDEA_Projects\\exchangeCurrencyBelBot\\assests\\error.jpg")))
+                    .caption("Введённый текст не является числом\n" +
                             "Введите число")
                     .build();
         }

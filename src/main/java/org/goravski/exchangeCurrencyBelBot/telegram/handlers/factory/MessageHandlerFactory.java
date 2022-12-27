@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.goravski.exchangeCurrencyBelBot.telegram.handlers.*;
 import org.goravski.exchangeCurrencyBelBot.util.Validator;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.EntityType;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -34,11 +34,11 @@ public class MessageHandlerFactory {
         }
     }
 
-    public static BotApiMethod<?> getUpdateMethodFromFactory(Update update) {
+    public static SendPhoto getUpdateMethodFromFactory(Update update) {
         log.info("MessageHandlerFactory started");
         if (Validator.chekCallBackQuery(update)){
             String[] params = update.getCallbackQuery().getData().split(":");
-            log.debug("CallBackQueryHandler params: {}", Arrays.toString(params));
+            log.info("CallBackQueryHandler params= {}", Arrays.toString(params));
             return MessageEnum.valueOf((params[0]).toUpperCase(Locale.ROOT))
                     .createMessageSend().getSendMessage(update);
         }

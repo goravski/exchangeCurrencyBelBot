@@ -32,7 +32,7 @@ public class BankKeyBoard implements KeyBoardInterface {
 
     private List<InlineKeyboardButton> getButton(BanksType bank) {
         return new ArrayList<>(Collections.singleton(InlineKeyboardButton.builder()
-                .text(bank.getNameBank())
+                .text(bank.getNameBankInterface().toString())
                 .callbackData(chekButton(bank) + ":" + bank + ":")
                 .build()));
     }
