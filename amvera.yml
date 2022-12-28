@@ -9,4 +9,4 @@ build:
 
 run:
   jarName: exchangeCurrencyBelBot-0.0.1-SNAPSHOT.jar
-  containerPort: 8080
+  containerPort: 80
