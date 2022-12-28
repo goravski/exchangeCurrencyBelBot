@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
-
+/**
+ * Builds keyboard by command /start
+ */
 @Slf4j
 public class StartKeyBoard implements KeyBoardInterface {
     @Getter

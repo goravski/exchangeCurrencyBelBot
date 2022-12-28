@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
-
+/**
+ * Builds keyboard to offer bank choice
+ */
 @Slf4j
 public class BankKeyBoard implements KeyBoardInterface {
 

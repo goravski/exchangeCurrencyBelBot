@@ -12,7 +12,9 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.File;
-
+/**
+ * Builds message to offer currency choice
+ */
 @Slf4j
 public class SetCurrencyMessageHandler extends AbstractMessageHandler {
     HashMapBankModeService mapBank = HashMapBankModeService.getInstance();

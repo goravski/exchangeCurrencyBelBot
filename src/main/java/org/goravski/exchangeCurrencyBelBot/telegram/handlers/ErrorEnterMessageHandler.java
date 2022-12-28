@@ -7,7 +7,9 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.File;
-
+/**
+ * Shape error message
+ */
 @Slf4j
 public class ErrorEnterMessageHandler extends AbstractMessageHandler {
     @Override

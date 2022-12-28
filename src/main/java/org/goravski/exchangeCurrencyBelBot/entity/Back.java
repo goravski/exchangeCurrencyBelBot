@@ -3,6 +3,9 @@ package org.goravski.exchangeCurrencyBelBot.entity;
 import lombok.NoArgsConstructor;
 import org.goravski.exchangeCurrencyBelBot.util.Emoji;
 
+/**
+ * Describe properties for button "back"
+ */
 @NoArgsConstructor
 public class Back implements EntityInterface{
     private final String nameBank = "НАЗАД"  + Emoji.TURN;

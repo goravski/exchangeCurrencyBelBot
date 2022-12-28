@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+/**
+ * Common get connection
+ */
 
 @Slf4j
 @Component

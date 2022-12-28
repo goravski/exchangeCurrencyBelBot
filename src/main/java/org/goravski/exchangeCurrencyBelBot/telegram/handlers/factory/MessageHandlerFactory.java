@@ -12,7 +12,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.function.Supplier;
-
+/**
+ * Handler factory
+ */
 @Slf4j
 public class MessageHandlerFactory {
     private enum MessageEnum {
@@ -33,7 +35,9 @@ public class MessageHandlerFactory {
             return messageHandler;
         }
     }
-
+    /**
+     * Get type handler according received content
+     */
     public static SendPhoto getUpdateMethodFromFactory(Update update) {
         log.info("MessageHandlerFactory started");
         if (Validator.chekCallBackQuery(update)){

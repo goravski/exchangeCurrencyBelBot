@@ -2,6 +2,9 @@ package org.goravski.exchangeCurrencyBelBot.util;
 
 import com.vdurmont.emoji.EmojiParser;
 
+/**
+ * Set emoji
+ */
 public enum Emoji {
     PRICE(EmojiParser.parseToUnicode(":dollar:")),
     CHART(EmojiParser.parseToUnicode("\uD83D\uDCCA")),

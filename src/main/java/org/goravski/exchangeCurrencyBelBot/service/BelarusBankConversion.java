@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
-
+/**
+ * Realise JsonParser for BelarusBANK data
+ */
 @Component
 @Slf4j
 public class BelarusBankConversion implements CurrencyConversionService {

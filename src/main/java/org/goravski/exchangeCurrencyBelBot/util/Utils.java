@@ -7,8 +7,14 @@ import org.goravski.exchangeCurrencyBelBot.service.HashMapCurrencyModeService;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
+/**
+ * Set utility methods
+ */
 @Slf4j
 public class Utils {
+    /**
+     * Rewrite currency keyboard according users choice
+     */
     @SneakyThrows
     public static void changeCurrencyInHashMap(CallbackQuery callbackQuery) {
         Message message = callbackQuery.getMessage();

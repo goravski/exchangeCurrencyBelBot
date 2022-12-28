@@ -5,7 +5,9 @@ import org.goravski.exchangeCurrencyBelBot.connection.BankConnections;
 import org.springframework.stereotype.Component;
 
 import java.net.HttpURLConnection;
-
+/**
+ * Set connection with Sberbank
+ */
 @Component
 public class SberBankConnection {
 

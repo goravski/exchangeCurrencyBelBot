@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * Factory chosen bank JsonParser
+ */
 @Component
 @Slf4j
 public class ConversionFactory {

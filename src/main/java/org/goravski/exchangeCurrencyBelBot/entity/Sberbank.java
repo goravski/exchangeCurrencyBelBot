@@ -2,7 +2,9 @@ package org.goravski.exchangeCurrencyBelBot.entity;
 
 import lombok.NoArgsConstructor;
 
-
+/**
+ * Describe Sberbank properties
+ */
 @NoArgsConstructor
 public class Sberbank implements EntityInterface{
     private final String nameBank = "СБЕРБАНК";

@@ -4,6 +4,9 @@ import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import java.net.HttpURLConnection;
+/**
+ * Set connection with Belarusbank
+ */
 
 @Component
 public class BelarusBankConnection {

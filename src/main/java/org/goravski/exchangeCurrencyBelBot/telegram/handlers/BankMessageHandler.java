@@ -8,7 +8,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 
 import java.io.File;
-
+/**
+ * Builds message to offer bank choice
+ */
 @Slf4j
 public class BankMessageHandler extends AbstractMessageHandler {
 

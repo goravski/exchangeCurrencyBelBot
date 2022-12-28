@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Builds keyboard to offer currency choice
+ */
 @Slf4j
 public class SetCurrencyKeyBoard implements KeyBoardInterface {
     private final HashMapCurrencyModeService currencyModeService = HashMapCurrencyModeService.getInstance();
