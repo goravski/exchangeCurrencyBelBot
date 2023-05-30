@@ -35,7 +35,7 @@ public class SetCurrencyKeyBoard implements KeyBoardInterface {
                         .build(),
                 InlineKeyboardButton.builder()
                         .text("КУПИТЬ")
-                        .callbackData(LocalConstant.SET_CURRENCY + ":" + "Продажа" + ":" + "")
+                        .callbackData(LocalConstant.SET_CURRENCY + ":" + "Покупка" + ":" + "")
                         .build()));
         for (CurrencyName currency : CurrencyName.values()) {
             rowButtons.add(Arrays.asList(
