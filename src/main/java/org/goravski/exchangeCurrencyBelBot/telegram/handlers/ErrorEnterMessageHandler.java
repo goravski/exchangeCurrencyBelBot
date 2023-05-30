@@ -18,14 +18,14 @@ public class ErrorEnterMessageHandler extends AbstractMessageHandler {
         if (Validator.chekCallBackQuery(update)){
             return SendPhoto.builder()
                     .photo(new InputFile(
-                            new File("D:\\IDEA_Projects\\exchangeCurrencyBelBot\\assests\\error.jpg")))
+                            new File("src/main/resources/assests/error.jpg")))
                     .chatId(update.getCallbackQuery().getMessage().getChatId())
                     .caption("Введите корректную сумму")
                     .build();
         }else {
             return SendPhoto.builder()
                     .photo(new InputFile(
-                            new File("D:\\IDEA_Projects\\exchangeCurrencyBelBot\\assests\\error.jpg")))
+                            new File("src/main/resources/assests/error.jpg")))
                     .chatId(update.getMessage().getChatId())
                     .caption("Введите корректную сумму")
                     .build();
