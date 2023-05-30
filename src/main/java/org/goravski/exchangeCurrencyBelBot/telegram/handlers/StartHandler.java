@@ -33,7 +33,7 @@ public class StartHandler extends AbstractMessageHandler {
         return SendPhoto.builder()
                 .chatId(chatId)
                 .photo(new InputFile(
-                        new File("assests\\100-banner2_C2.png")))
+                        new File("https://cdn.pixabay.com/photo/2015/12/16/12/52/money-1095903_1280.jpg")))
                 .caption("Привет, " + name + "!\n"
                         + "Здесь можно:\n"
                         + "1. Посчитать результат обмена валют для выбранного банка.\n"
