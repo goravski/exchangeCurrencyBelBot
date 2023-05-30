@@ -59,7 +59,7 @@ public class SetCurrencyMessageHandler extends AbstractMessageHandler {
             return SendPhoto.builder()
                     .chatId(update.getCallbackQuery().getMessage().getChatId())
                     .photo(new InputFile(
-                            new File("src/main/resources/assests/error.jpg")))
+                            new File("sassests/error.jpg")))
                     .caption("something wrong")
                     .build();
         }

@@ -21,7 +21,7 @@ public class BankMessageHandler extends AbstractMessageHandler {
         SendPhoto sendPhoto = SendPhoto.builder()
                 .chatId(update.getCallbackQuery().getMessage().getChatId())
                 .photo(new InputFile(
-                        new File("src/main/resources/assests/nbrb.jpg")))
+                        new File("assests/nbrb.jpg")))
                 .parseMode("HTML")
                 .caption("<strong>Выбери банк</strong>")
                 .replyMarkup(keyBoard)
