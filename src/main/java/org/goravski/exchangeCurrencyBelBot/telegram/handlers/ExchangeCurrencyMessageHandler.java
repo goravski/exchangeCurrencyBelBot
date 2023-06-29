@@ -40,7 +40,7 @@ public class ExchangeCurrencyMessageHandler extends AbstractMessageHandler {
             return SendPhoto.builder()
                     .chatId(message.getChatId())
                     .photo(new InputFile(
-                            new File("assests\\done.jpg")))
+                            new File("src/main/resources/assets/done.jpg")))
                     .caption(String.format(
                             "%4.2f %s = %4.2f %s  "
                             , value, originalCurrency
@@ -51,7 +51,7 @@ public class ExchangeCurrencyMessageHandler extends AbstractMessageHandler {
             return SendPhoto.builder()
                     .chatId(message.getChatId())
                     .photo(new InputFile(
-                            new File("assests\\error.jpg")))
+                            new File("src/main/resources/assets/error.jpg")))
                     .caption("Введённый текст не является числом\n" +
                             "Введите число")
                     .build();

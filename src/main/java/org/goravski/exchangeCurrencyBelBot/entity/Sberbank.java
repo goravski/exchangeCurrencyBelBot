@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Sberbank implements EntityInterface{
     private final String nameBank = "СБЕРБАНК";
-    private final String path = "assests\\sberbank.png";
+    private final String path = "src/main/resources/assets/sberbank.png";
 
     public String getNameBank() {
         return nameBank;

@@ -16,7 +16,7 @@ public class AnaliticsMessageHandler extends AbstractMessageHandler{
         log.info("AnaliticMessageHandler send Message");
         return SendPhoto.builder()
                 .photo(new InputFile(
-                        new File("D:\\IDEA_Projects\\exchangeCurrencyBelBot\\assests\\analitics.jpg")))
+                        new File("src/main/resources/assets/analitics.jpg")))
                 .chatId(update.getCallbackQuery().getMessage().getChatId())
                 .caption("Здесь пока ничего нет")
                 .build();

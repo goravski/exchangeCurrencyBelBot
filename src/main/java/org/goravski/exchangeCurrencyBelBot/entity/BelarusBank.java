@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BelarusBank implements EntityInterface{
     private final String nameBank = "БЕЛАРУСБАНК";
-    private final String path = "assests\\belarusbank-logo.jpg";
+    private final String path = "src/main/resources/assets/belarusbank-logo.jpg";
 
     public String getNameBank() {
         return nameBank;
