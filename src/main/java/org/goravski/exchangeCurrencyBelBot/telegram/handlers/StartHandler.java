@@ -32,7 +32,7 @@ public class StartHandler extends AbstractMessageHandler {
             name = update.getMessage().getFrom().getFirstName();
         }
         File dir = new File("./exchangeCurrencyBelBot-0.0.1-SNAPSHOT.jar");
-        log.info("dir:", dir);
+        log.info("dir: dir");
         Stream.of(dir.listFiles()).forEach(System.out ::println);
         return SendPhoto.builder()
                 .chatId(chatId)
