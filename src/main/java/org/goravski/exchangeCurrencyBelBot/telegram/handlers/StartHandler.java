@@ -11,8 +11,6 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
 
 
@@ -35,13 +33,6 @@ public class StartHandler extends AbstractMessageHandler {
             chatId = update.getMessage().getChatId();
             name = update.getMessage().getFrom().getFirstName();
         }
-        BufferedImage bImage = ImageIO.read(new File("src/main/resources/assets/natbank.png"));
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ImageIO.write(bImage, "png", bos );
-        bos.flush();
-        String base64String = Base64.encodeBase64String(bos.toByteArray());
-
-        System.out.println("BASESTRING: "+ base64String);
         return SendPhoto.builder()
                 .chatId(chatId)
                 .photo( new InputFile(
