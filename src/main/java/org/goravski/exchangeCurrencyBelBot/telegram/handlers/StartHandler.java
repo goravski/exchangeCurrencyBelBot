@@ -2,9 +2,7 @@ package org.goravski.exchangeCurrencyBelBot.telegram.handlers;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.binary.Base64;
 import org.goravski.exchangeCurrencyBelBot.telegram.keyboard.KeyBoardFactory;
-import org.goravski.exchangeCurrencyBelBot.util.Images;
 import org.goravski.exchangeCurrencyBelBot.util.Validator;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
@@ -36,7 +34,7 @@ public class StartHandler extends AbstractMessageHandler {
         return SendPhoto.builder()
                 .chatId(chatId)
                 .photo(new InputFile(
-                        new File(this.getClass().getClassLoader().getResource("/assets/100-banner2_C2.png").getFile())))
+                        new File(this.getClass().getClassLoader().getResource("/assets/banner.png").getFile())))
 //                .photo( new InputFile(
 //                        new ByteArrayInputStream(Base64.decodeBase64(Images.READY)), "ready.png"))
                 .caption("Привет, " + name + "!\n"
