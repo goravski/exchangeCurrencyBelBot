@@ -9,6 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.EntityType;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.function.Supplier;
@@ -38,7 +39,7 @@ public class MessageHandlerFactory {
     /**
      * Get type handler according received content
      */
-    public static SendPhoto getUpdateMethodFromFactory(Update update) {
+    public static SendPhoto getUpdateMethodFromFactory(Update update) throws IOException {
         log.info("MessageHandlerFactory started");
         if (Validator.chekCallBackQuery(update)){
             String[] params = update.getCallbackQuery().getData().split(":");

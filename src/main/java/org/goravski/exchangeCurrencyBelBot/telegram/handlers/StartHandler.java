@@ -2,15 +2,19 @@ package org.goravski.exchangeCurrencyBelBot.telegram.handlers;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.binary.Base64;
 import org.goravski.exchangeCurrencyBelBot.telegram.keyboard.KeyBoardFactory;
+import org.goravski.exchangeCurrencyBelBot.util.Images;
 import org.goravski.exchangeCurrencyBelBot.util.Validator;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 
-import java.io.File;
-import java.util.stream.Stream;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
+
 
 /**
  * Builds replay on command /start command.
@@ -19,7 +23,7 @@ import java.util.stream.Stream;
 public class StartHandler extends AbstractMessageHandler {
 
     @Override
-    public SendPhoto getSendMessage(Update update) {
+    public SendPhoto getSendMessage(Update update) throws IOException {
         ReplyKeyboard keyBoard = KeyBoardFactory.getKeyBoardFromFactory(update).getKeyBoard(update);
         log.info("StartHandler send message + keyboard");
         Long chatId;
@@ -31,13 +35,18 @@ public class StartHandler extends AbstractMessageHandler {
             chatId = update.getMessage().getChatId();
             name = update.getMessage().getFrom().getFirstName();
         }
-//        File dir = new File("./exchangeCurrencyBelBot-0.0.1-SNAPSHOT.jar");
-//        log.info("dir: dir");
-//        Stream.of(dir.listFiles()).forEach(System.out ::println);
+//        BufferedImage bImage = ImageIO.read(new File("src/main/resources/assets/100-banner2_C2.png"));
+//        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//        ImageIO.write(bImage, "png", bos );
+//        bos.flush();
+//        String base64String = Base64.encodeBase64String(bos.toByteArray());
+//
+//        System.out.println("BASESTRING: "+ base64String);
         return SendPhoto.builder()
                 .chatId(chatId)
-                .photo(new InputFile(
-                        new File("$PROJECT_DIR$/src/main/resources/assets/100-banner2_C2.png")))
+                .photo( new InputFile(
+                        new ByteArrayInputStream(
+                                Base64.decodeBase64(Base64.decodeBase64(Images.READY))), "100-banner2_C2.png"))
                 .caption("Привет, " + name + "!\n"
                         + "Здесь можно:\n"
                         + "1. Посчитать результат обмена валют для выбранного банка.\n"
