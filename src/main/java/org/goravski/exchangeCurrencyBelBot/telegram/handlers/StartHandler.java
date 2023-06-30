@@ -36,7 +36,7 @@ public class StartHandler extends AbstractMessageHandler {
         return SendPhoto.builder()
                 .chatId(chatId)
                 .photo(new InputFile(
-                        new File(this.getClass().getClassLoader().getResource("assets/100-banner2_C2.png").getFile())))
+                        new File(this.getClass().getClassLoader().getResource("/assets/100-banner2_C2.png").getFile())))
 //                .photo( new InputFile(
 //                        new ByteArrayInputStream(Base64.decodeBase64(Images.READY)), "ready.png"))
                 .caption("Привет, " + name + "!\n"
