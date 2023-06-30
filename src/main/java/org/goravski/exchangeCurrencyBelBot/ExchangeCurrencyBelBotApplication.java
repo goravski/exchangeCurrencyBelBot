@@ -12,8 +12,6 @@ public class ExchangeCurrencyBelBotApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ExchangeCurrencyBelBotApplication.class, args);
-		File dir = new File("./exchangeCurrencyBelBot-0.0.1-SNAPSHOT.jar");
-		Stream.of(dir.listFiles()).forEach(System.out ::println);
 	}
 
 }

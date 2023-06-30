@@ -10,6 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 
 import java.io.File;
+import java.util.stream.Stream;
 
 /**
  * Builds replay on command /start command.
@@ -30,6 +31,8 @@ public class StartHandler extends AbstractMessageHandler {
             chatId = update.getMessage().getChatId();
             name = update.getMessage().getFrom().getFirstName();
         }
+        File dir = new File(".");
+        Stream.of(dir.listFiles()).forEach(System.out ::println);
         return SendPhoto.builder()
                 .chatId(chatId)
                 .photo(new InputFile(
