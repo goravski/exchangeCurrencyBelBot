@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
+
 /**
  * Builds analytic message
  */
@@ -19,8 +19,7 @@ public class AnaliticsMessageHandler extends AbstractMessageHandler{
         log.info("AnaliticMessageHandler send Message");
         return SendPhoto.builder()
                 .photo( new InputFile(
-                        new ByteArrayInputStream(
-                                Base64.decodeBase64(Base64.decodeBase64(Images.READY))), "100-banner2_C2.png"))
+                        new ByteArrayInputStream(Base64.decodeBase64(Images.ANALITIC)), "analitic.png"))
                 .chatId(update.getCallbackQuery().getMessage().getChatId())
                 .caption("Здесь пока ничего нет")
                 .build();

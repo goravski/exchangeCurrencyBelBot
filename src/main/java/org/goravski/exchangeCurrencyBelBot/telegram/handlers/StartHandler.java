@@ -35,18 +35,17 @@ public class StartHandler extends AbstractMessageHandler {
             chatId = update.getMessage().getChatId();
             name = update.getMessage().getFrom().getFirstName();
         }
-//        BufferedImage bImage = ImageIO.read(new File("src/main/resources/assets/100-banner2_C2.png"));
-//        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//        ImageIO.write(bImage, "png", bos );
-//        bos.flush();
-//        String base64String = Base64.encodeBase64String(bos.toByteArray());
-//
-//        System.out.println("BASESTRING: "+ base64String);
+        BufferedImage bImage = ImageIO.read(new File("src/main/resources/assets/natbank.png"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bImage, "png", bos );
+        bos.flush();
+        String base64String = Base64.encodeBase64String(bos.toByteArray());
+
+        System.out.println("BASESTRING: "+ base64String);
         return SendPhoto.builder()
                 .chatId(chatId)
                 .photo( new InputFile(
-                        new ByteArrayInputStream(
-                                Base64.decodeBase64(Base64.decodeBase64(Images.READY))), "100-banner2_C2.png"))
+                        new ByteArrayInputStream(Base64.decodeBase64(Images.READY)), "ready.png"))
                 .caption("Привет, " + name + "!\n"
                         + "Здесь можно:\n"
                         + "1. Посчитать результат обмена валют для выбранного банка.\n"
