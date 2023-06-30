@@ -33,8 +33,10 @@ public class SetCurrencyMessageHandler extends AbstractMessageHandler {
                 log.info("SetCurrencyMessageHandler send message make choice currency keyboard");
                 return SendPhoto.builder()
                         .parseMode("HTML")
-                        .photo(new InputFile(
-                                new File(mapBank.getBankEntity(chatId).getNameBankInterface().getPath())))
+//                        .photo(new InputFile(
+//                                new File(mapBank.getBankEntity(chatId).getNameBankInterface().getPath())))
+                        .photo( new InputFile(
+                                new ByteArrayInputStream(Base64.decodeBase64(Images.NATBANK)), "natbank.png"))
                         .caption("""
                                 \s
                                 1. Выбери валюты для обмена\s
